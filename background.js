@@ -11,4 +11,4 @@ chrome.runtime.onInstalled.addListener(function() {
     })
 })
 
-chrome.pageAction.onClicked.addListener(function (){alert("Triggered action")})
+chrome.pageAction.onClicked.addListener(function (){alert("Triggered action!")})
