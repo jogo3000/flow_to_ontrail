@@ -1,0 +1,13 @@
+{"name": "flow_to_ontrail",
+ "version": "0.1",
+ "description": "Prefills an Ontrail report based on a Polar flow excercise report",
+ "background":  {
+     "scripts": ["background.js"],
+     "persistent": false
+ },
+ "page_action": {
+     "default_icon": "ico-19.png",
+     "default_title": "Luo raportti"},
+ "permissions": ["declarativeContent"],
+ "manifest_version": 2
+}
