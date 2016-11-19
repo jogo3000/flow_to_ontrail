@@ -1,3 +1,5 @@
+module.exports = { trim: trim };
+
 // http://stackoverflow.com/questions/1418050/string-strip-for-javascript
 function trim(s) {
 	return s.replace(/^\s+|\s+$/g, '');

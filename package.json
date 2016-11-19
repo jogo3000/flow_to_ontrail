@@ -1,0 +1,26 @@
+{
+  "name": "flow_to_ontrail",
+  "version": "1.0.0",
+  "description": "Chrome plugin which auto fills an ontrail.net exercise report based on a Polar Flow activity report.",
+  "scripts": {
+  	"compile": "node compile.js",
+    "test": "mocha -u qunit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jogo3000/flow_to_ontrail.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jogo3000/flow_to_ontrail/issues"
+  },
+  "homepage": "https://github.com/jogo3000/flow_to_ontrail#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2",
+    "sinon": "^1.17.6"
+  },
+  "private": true
+}
