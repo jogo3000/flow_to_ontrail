@@ -23,23 +23,34 @@ prefillOntrail = function() {
 
 	data = {};
 
+	// Read data from flow.polar.com
 	chrome.tabs.query({
 		active : true,
 		currentWindow : true
 	}, function(tabs) {
 		chrome.tabs.sendMessage(tabs[0].id, {}, function(response) {
-			console.log(response.duration);
-			console.log(response.distance);
+			data.duration = response.duration;
+			data.distance = response.distance;
 		});
 	});
 
+	// Open a new tab and inject content script
 	chrome.tabs.create({
 		'url' : 'http://ontrail.net/#addex'
 	});
 
 	chrome.tabs.executeScript(null, {
 		file : "ontrail_addex_contentscript.js"
+	}, function() {
+		// Message content script to prefill data
+		chrome.tabs.query({
+			active : true,
+			currentWindow : true
+		}, function(tabs) {
+			chrome.tabs.sendMessage(tabs[0].id, data, null);
+		});
 	});
+
 };
 
 chrome.pageAction.onClicked.addListener(prefillOntrail);
