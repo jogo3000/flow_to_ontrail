@@ -8,6 +8,9 @@
  "page_action": {
      "default_icon": "ico-19.png",
      "default_title": "Luo raportti"},
- "permissions": ["declarativeContent"],
+ "permissions": [
+     "declarativeContent",
+     "tabs"
+ ],
  "manifest_version": 2
 }
