@@ -19,16 +19,6 @@ chrome.runtime.onInstalled.addListener(function() {
 	});
 });
 
-function sendMessage(data, callback) {
-	chrome.tabs.query({
-		active : true,
-		currentWindow : true
-	}, function(tabs) {
-		chrome.tabs.sendMessage(tabs[0].id, data, callback);
-	});
-}
-
-
 prefillOntrail = function() {
 
 	data = {};
@@ -37,7 +27,7 @@ prefillOntrail = function() {
 		active : true,
 		currentWindow : true
 	}, function(tabs) {
-		chrome.tabs.sendMessage(tabs[0].id, data, function(response) {
+		chrome.tabs.sendMessage(tabs[0].id, {}, function(response) {
 			console.log(response.duration);
 			console.log(response.distance);
 		});
@@ -46,8 +36,10 @@ prefillOntrail = function() {
 	chrome.tabs.create({
 		'url' : 'http://ontrail.net/#addex'
 	});
-	
-	chrome.tabs.executeScript(null, {file: "ontrail_addex_contentscript.js"})
+
+	chrome.tabs.executeScript(null, {
+		file : "ontrail_addex_contentscript.js"
+	});
 };
 
 chrome.pageAction.onClicked.addListener(prefillOntrail);

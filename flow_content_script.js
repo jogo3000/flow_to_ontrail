@@ -1,7 +1,9 @@
-function readValues(request, sender, sendResponse) {
-	data.duration = document.getElementById('preciseDuration').getAttribute('value');
-	data.distance = document.getElementById('preciseDistanceStr').getAttribute('value');
-	sendResponse(data);
+function readValues(data, sender, sendResponse) {
+	response = {
+			duration: document.getElementById('preciseDuration').getAttribute('value'),
+			distance: document.getElementById('preciseDistanceStr').getAttribute('value')
+	};
+	sendResponse(response);
 }
 
 chrome.runtime.onMessage.addListener(readValues);

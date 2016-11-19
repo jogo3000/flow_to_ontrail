@@ -21,7 +21,8 @@
  "permissions": [
      "declarativeContent",
      "tabs",
-     "http://ontrail.net/#addex"
+     "http://ontrail.net/#addex",
+     "https://flow.polar.com/training/analysis/*"
  ],
  "manifest_version": 2
 }
