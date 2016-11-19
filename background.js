@@ -29,8 +29,7 @@ prefillOntrail = function() {
 		currentWindow : true
 	}, function(tabs) {
 		chrome.tabs.sendMessage(tabs[0].id, {}, function(response) {
-			data.duration = response.duration;
-			data.distance = response.distance;
+			data = response;
 		});
 	});
 
