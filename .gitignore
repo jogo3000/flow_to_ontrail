@@ -1,2 +1,5 @@
 *~
 jslintconf
+/node_modules/
+.project
+.settings*
