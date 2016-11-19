@@ -5,6 +5,12 @@
      "scripts": ["background.js"],
      "persistent": false
  },
+ "content_scripts": [
+     {
+	 "matches": ["https://flow.polar.com/training/analysis/*"],
+	 "js": ["content_script.js"]
+     }
+ ],
  "page_action": {
      "default_icon": "ico-19.png",
      "default_title": "Luo raportti"},
