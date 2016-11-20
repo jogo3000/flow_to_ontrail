@@ -11,7 +11,7 @@
 	 "js": ["flow_content_script.js"]
      },
      {
-     "matches": ["http://ontrail.net/#addex"],
+     "matches": ["http://beta.ontrail.net/#addex"],
      "js": ["ontrail_addex_contentscript.js"]
      }
  ],
@@ -21,7 +21,7 @@
  "permissions": [
      "declarativeContent",
      "tabs",
-     "http://ontrail.net/#addex",
+     "http://beta.ontrail.net/#addex",
      "https://flow.polar.com/training/analysis/*"
  ],
  "manifest_version": 2

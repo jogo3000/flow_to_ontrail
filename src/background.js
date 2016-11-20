@@ -35,7 +35,7 @@ prefillOntrail = function() {
 
 	// Open a new tab and inject content script
 	chrome.tabs.create({
-		'url' : 'http://ontrail.net/#addex'
+		'url' : 'http://beta.ontrail.net/#addex'
 	});
 
 	chrome.tabs.executeScript(null, {

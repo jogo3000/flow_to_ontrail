@@ -16,3 +16,7 @@ test('#round', function() {
 		assert.equal(test[0], cs.round(test[1]));
 	})
 });
+
+test('#toOntrailDateString', function(){
+	assert.equal('11.1.1981', cs.toOntrailDateString(new Date(1981, 1, 11)));
+});
