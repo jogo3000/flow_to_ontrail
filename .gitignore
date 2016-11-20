@@ -4,3 +4,5 @@ jslintconf
 .project
 .settings*
 /build/
+*.crx
+*.pem
