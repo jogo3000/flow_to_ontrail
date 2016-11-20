@@ -20,6 +20,7 @@
   "homepage": "https://github.com/jogo3000/flow_to_ontrail#readme",
   "devDependencies": {
     "chai": "^3.5.0",
+    "jsdom": "^9.8.3",
     "jshint": "^2.9.4",
     "mocha": "^3.1.2",
     "sinon": "^1.17.6",
@@ -27,8 +28,7 @@
   },
   "private": true,
   "dependencies": {},
-  
   "jshintConfig": {
-  	"esversion": 6
+    "esversion": 6
   }
 }
