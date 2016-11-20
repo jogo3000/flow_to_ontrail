@@ -6,7 +6,7 @@ module.exports = {
 // http://stackoverflow.com/questions/1418050/string-strip-for-javascript
 function trim(s) {
 	return s.replace(/^\s+|\s+$/g, '');
-};
+}
 
 const MONTHS = {
 		'Tammi': 1,
@@ -20,11 +20,11 @@ const MONTHS = {
 		'Syys': 9,
 		'Loka': 10,
 		'Marras': 11,
-		'Joulu': 12}
+		'Joulu': 12};
 
 function parseFlowDate(s) {
 	// s looks like this Lauantai, Marras 19, 2016 06:50 | Polar v800
-	var sx = s.split(' | ')[0] // strip device name
+	var sx = s.split(' | ')[0]; // strip device name
 	sx = trim(sx);
 	var sa = sx.split(', '); // ['Lauantai', 'Marras 19, '2016 06:50']
 	var year = parseInt(sa[2].split(' ')[0]);
