@@ -15,6 +15,11 @@
      "js": ["ontrail_addex_contentscript.js"]
      }
  ],
+ "icons": {
+ 	"19": "ico-19.png",
+ 	"48": "ico-48.png",
+ 	"128": "ico-128.png"
+ },
  "page_action": {
      "default_icon": "ico-19.png",
      "default_title": "Luo raportti"},
