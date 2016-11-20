@@ -6,3 +6,4 @@ jslintconf
 /build/
 *.crx
 *.pem
+screenshots/

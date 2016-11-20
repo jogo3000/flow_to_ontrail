@@ -1,5 +1,6 @@
-{"name": "flow_to_ontrail",
- "version": "0.1",
+{"name": "Flow to Ontrail",
+ "short name": "Flow2Ontrail",
+ "version": "1.0",
  "description": "Prefills an Ontrail report based on a Polar flow excercise report",
  "background":  {
      "scripts": ["background.js"],
