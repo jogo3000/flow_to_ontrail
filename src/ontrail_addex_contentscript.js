@@ -1,10 +1,7 @@
-/**
- * 
- */
-
 module.exports = {
 	formatDistance : formatDistance,
-	toOntrailDateString : toOntrailDateString
+	toOntrailDateString : toOntrailDateString,
+	prefiller : prefiller
 };
 
 function formatDistance(v) {
@@ -13,7 +10,7 @@ function formatDistance(v) {
 }
 
 function toOntrailDateString(d) {
-	return d.getDate() + '.' + d.getMonth() + '.' + d.getFullYear();
+	return d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear();
 }
 
 function fillvalue(id, value) {
@@ -21,6 +18,31 @@ function fillvalue(id, value) {
 	element.value = value;
 	element.dispatchEvent(new KeyboardEvent('keyup')); // trigger validation
 	element.previousElementSibling.classList = [ 'active' ]; // beta.ontrail.net
+}
+
+/*
+ * Usually found on #s2id_ex-tags > ul > li.select2-search-field > input
+ */
+function TagSelector(doc) {
+	return function(selector, value) {
+		var element = document.querySelector(selector);
+		element.dispatchEvent(new Event('keydown'));
+		element.value = value + ',';
+		element.dispatchEvent(new Event('keyup'));
+	};
+}
+
+function prefiller(tagSelector) {
+	return function(date) {
+		var orig = new Date(date.timestamp);
+		var noon = new Date(date.timestamp);
+		noon.setHours(12);
+		noon.setMinutes(0);
+		noon.setSeconds(0);
+		noon.setMilliseconds(0);
+		tagSelector('#s2id_ex-tags > ul > li.select2-search-field > input',
+				(orig < noon) ? 'aamu' : 'iltapäivä');
+	};
 }
 
 function prefillValues(request, sender, sendResponse) {

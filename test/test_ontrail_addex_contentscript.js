@@ -1,5 +1,7 @@
 const
 assert = require('assert');
+const
+spy = require('sinon').spy;
 
 var cs = require('../src/ontrail_addex_contentscript.js');
 suite('Ontrail contentscript');
@@ -15,5 +17,26 @@ test('#round', function() {
 });
 
 test('#toOntrailDateString', function() {
-	assert.equal('11.1.1981', cs.toOntrailDateString(new Date(1981, 1, 11)));
+	assert.equal('11.1.1981', cs.toOntrailDateString(new Date(
+			"1981-01-11T07:56:00.123Z")));
+});
+
+function assertTimeTagCreated(expected, timestamp) {
+	data = {
+		timestamp : timestamp
+	};
+	var tagSelector = spy();
+
+	cs.prefiller(tagSelector)(data);
+
+	assert(tagSelector.calledWith(
+			'#s2id_ex-tags > ul > li.select2-search-field > input', expected));
+}
+
+test('#prefill generates tag for morning run', function() {
+	assertTimeTagCreated('aamu', '2011-05-26T07:56:00.123Z');
+});
+
+test('#prefill generates tag for evening run', function() {
+	assertTimeTagCreated('iltapäivä', '2011-05-26T12:00:01.123Z');
 });
