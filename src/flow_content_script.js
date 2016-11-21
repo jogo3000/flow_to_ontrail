@@ -8,30 +8,37 @@ function trim(s) {
 	return s.replace(/^\s+|\s+$/g, '');
 }
 
-const MONTHS = {
-		'Tammi': 1,
-		'Helmi': 2,
-		'Maalis': 3,
-		'Huhti': 4,
-		'Touko': 5,
-		'Kesä': 6,
-		'Heinä': 7,
-		'Elo': 8,
-		'Syys': 9,
-		'Loka': 10,
-		'Marras': 11,
-		'Joulu': 12};
+// javascript Date format months start from zero
+const
+MONTHS = {
+	'Tammi' : 0,
+	'Helmi' : 1,
+	'Maalis' : 2,
+	'Huhti' : 3,
+	'Touko' : 4,
+	'Kesä' : 5,
+	'Heinä' : 6,
+	'Elo' : 7,
+	'Syys' : 8,
+	'Loka' : 9,
+	'Marras' : 10,
+	'Joulu' : 11
+};
 
 function parseFlowDate(s) {
 	// s looks like this Lauantai, Marras 19, 2016 06:50 | Polar v800
 	var sx = s.split(' | ')[0]; // strip device name
 	sx = trim(sx);
 	var sa = sx.split(', '); // ['Lauantai', 'Marras 19, '2016 06:50']
-	var year = parseInt(sa[2].split(' ')[0]);
-	var month_day=sa[1].split(' ');
+	var yearAndTime = sa[2].split(' ');
+	var year = parseInt(yearAndTime[0]);
+	var month_day = sa[1].split(' ');
 	var month = MONTHS[month_day[0]];
 	var day = parseInt(month_day[1]);
-	return new Date(2016, month, day);
+
+	var time = yearAndTime[1].split(':');
+
+	return new Date(2016, month, day, time[0], time[1]);
 }
 
 function readValues(data, sender, sendResponse) {
@@ -43,8 +50,10 @@ function readValues(data, sender, sendResponse) {
 		avgheartrate : document.getElementById('BDPHrAvg').innerText,
 		extype : trim(document.getElementById('sport-icon-image').getAttribute(
 				'title')),
-		timestamp: parseFlowDate(document.querySelector('#sportHeading > br').nextSibling.textContent).toJSON()
-				
+		timestamp : parseFlowDate(
+				document.querySelector('#sportHeading > br').nextSibling.textContent)
+				.toJSON()
+
 	};
 	sendResponse(response);
 }
