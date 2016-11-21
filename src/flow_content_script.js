@@ -25,20 +25,23 @@ MONTHS = {
 	'Joulu' : 11
 };
 
+/**
+ * In flow Finnish site s looks like this Lauantai, Marras 19, 2016 06:50 |
+ * Polar v800
+ * 
+ * @param s
+ *            date string
+ * @returns {Date}
+ */
 function parseFlowDate(s) {
-	// s looks like this Lauantai, Marras 19, 2016 06:50 | Polar v800
-	var sx = s.split(' | ')[0]; // strip device name
-	sx = trim(sx);
-	var sa = sx.split(', '); // ['Lauantai', 'Marras 19, '2016 06:50']
-	var yearAndTime = sa[2].split(' ');
-	var year = parseInt(yearAndTime[0]);
-	var month_day = sa[1].split(' ');
-	var month = MONTHS[month_day[0]];
-	var day = parseInt(month_day[1]);
+	var sa = s.replace(/[\,:\|]/g, ' ').replace(/\s+/g, ' ').split(' ');
+	var year = parseInt(sa[3]);
+	var month = MONTHS[sa[1]];
+	var day = parseInt(sa[2]);
+	var hour = parseInt(sa[4]);
+	var minute = parseInt(sa[5]);
 
-	var time = yearAndTime[1].split(':');
-
-	return new Date(2016, month, day, time[0], time[1]);
+	return new Date(year, month, day, hour, minute);
 }
 
 function readValues(data, sender, sendResponse) {
