@@ -34,7 +34,7 @@ MONTHS = {
  * @returns {Date}
  */
 function parseFlowDate(s) {
-	var sa = s.replace(/[\,:\|]/g, ' ').replace(/\s+/g, ' ').split(' ');
+	var sa = s.trim().replace(/[\,:\|]/g, ' ').replace(/\s+/g, ' ').split(' ');
 	var year = parseInt(sa[3]);
 	var month = MONTHS[sa[1]];
 	var day = parseInt(sa[2]);
