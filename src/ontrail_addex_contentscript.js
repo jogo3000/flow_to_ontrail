@@ -13,7 +13,7 @@ function formatDistance(v) {
 }
 
 function toOntrailDateString(d) {
-	return d.getDate() + '.' + d.getMonth() + '.' + d.getFullYear();
+	return d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear();
 }
 
 function fillvalue(id, value) {

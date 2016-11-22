@@ -14,6 +14,11 @@ test('#round', function() {
 	})
 });
 
+// Javascript date constructor takes moths as 0...11
 test('#toOntrailDateString', function() {
-	assert.equal('11.1.1981', cs.toOntrailDateString(new Date(1981, 1, 11)));
+	assert.equal('11.2.1981', cs.toOntrailDateString(new Date(1981, 1, 11)));
+});
+
+test('#toOntrailDateString December', function() {
+	assert.equal('11.12.1981', cs.toOntrailDateString(new Date(1981, 11, 11)));
 });
