@@ -22,12 +22,12 @@ function assertDate(s, f) {
 }
 
 test('#Date parsing gets the year right', function() {
-	assertDate("  Lauantai, Marras 1, 2017 06:50 | Polar V800", function(p) {
+	assertDate("Lauantai, Marras 1, 2017 06:50 | Polar V800", function(p) {
 		assert.equal(2017, p.getFullYear());
 	});
 });
 test('#Date parsing gets the month right', function() {
-	assertDate("  Lauantai, Marras 12, 2016 06:50 | Polar V800", function(p) {
+	assertDate("Lauantai, Marras 12, 2016 06:50 | Polar V800", function(p) {
 		assert.equal(10, p.getMonth());
 	});
 });

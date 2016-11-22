@@ -23,7 +23,7 @@ function fillvalue(id, value) {
 /*
  * Usually found on #s2id_ex-tags > ul > li.select2-search-field > input
  */
-function TagSelector() {
+function TagSelector(doc) {
 	return function(selector, value) {
 		var element = document.querySelector(selector);
 		element.dispatchEvent(new Event('keydown'));
@@ -43,8 +43,6 @@ function prefiller(tagSelector) {
 	};
 }
 
-var prefillDelegate = prefiller(TagSelector());
-
 function prefillValues(request, sender, sendResponse) {
 	// duration has millisecond precision
 	fillvalue('ex-duration', request.duration.split('.', 1)[0]);
@@ -58,8 +56,6 @@ function prefillValues(request, sender, sendResponse) {
 		selector.options[i].selected = selector.options[i].value === request.extype;
 	}
 	selector.dispatchEvent(new Event('change'));
-
-	prefillDelegate(request);
 }
 
 chrome.runtime.onMessage.addListener(prefillValues);
