@@ -36,10 +36,8 @@ function prefiller(tagSelector) {
 	return function(date) {
 		var orig = new Date(date.timestamp);
 		var noon = new Date(date.timestamp);
-		noon.setHours(12);
-		noon.setMinutes(0);
-		noon.setSeconds(0);
-		noon.setMilliseconds(0);
+		noon.setHours(12, 0, 0, 0);
+		console.log([ orig, noon ]);
 		tagSelector('#s2id_ex-tags > ul > li.select2-search-field > input',
 				(orig < noon) ? 'aamu' : 'iltapäivä');
 	};

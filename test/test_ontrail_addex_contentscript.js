@@ -29,12 +29,28 @@ function assertTimeTagCreated(expected, timestamp) {
 
 	cs.prefiller(tagSelector)(data);
 
-	assert(tagSelector.calledWith(
-			'#s2id_ex-tags > ul > li.select2-search-field > input', expected));
+	var result = tagSelector.getCall(0);
+	assert.equal(expected, result.args[1]);
 }
 
 test('#prefill generates tag for morning run', function() {
 	assertTimeTagCreated('aamu', '2011-05-26T07:56:00.123Z');
+});
+
+test('#prefill generates tag for morning run2', function() {
+	assertTimeTagCreated('aamu', '2011-05-26T11:59:58.000Z');
+});
+
+test('#prefill generates tag for morning run3', function() {
+	assertTimeTagCreated('aamu', '2011-05-26T10:59:58.000Z');
+});
+
+test('#prefill generates tag for morning run4', function() {
+	assertTimeTagCreated('aamu', '2011-05-26T09:59:58.000Z');
+});
+
+test('#prefill generates tag for morning run5', function() {
+	assertTimeTagCreated('aamu', '2011-05-26T08:59:58.000Z');
 });
 
 test('#prefill generates tag for evening run', function() {
