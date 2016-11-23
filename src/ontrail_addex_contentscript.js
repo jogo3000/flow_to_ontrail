@@ -1,10 +1,9 @@
-/**
- * 
- */
+model = require('./ontrailmodel.js').OntrailModel;
 
 module.exports = {
 	formatDistance : formatDistance,
-	toOntrailDateString : toOntrailDateString
+	toOntrailDateString : toOntrailDateString,
+	Prefiller : Prefiller
 };
 
 function formatDistance(v) {
@@ -37,5 +36,11 @@ function prefillValues(request, sender, sendResponse) {
 	}
 	selector.dispatchEvent(new Event('change'));
 }
+
+function Prefiller(model) {
+	return function(data) {
+
+	};
+};
 
 chrome.runtime.onMessage.addListener(prefillValues);

@@ -1,5 +1,9 @@
 const
 assert = require('assert');
+const
+OntrailModel = require('../src/ontrailmodel.js').OnrailModel;
+const
+sinon = require('sinon');
 
 var cs = require('../src/ontrail_addex_contentscript.js');
 suite('Ontrail contentscript');
@@ -21,4 +25,14 @@ test('#toOntrailDateString', function() {
 
 test('#toOntrailDateString December', function() {
 	assert.equal('11.12.1981', cs.toOntrailDateString(new Date(1981, 11, 11)));
+});
+
+test('#Prefill duration', function() {
+	var model = sinon.spy(OntrailModel, 'fillDuration');
+	cs.Prefiller(model)({
+		duration : '00:40:10.101'
+	});
+
+	assert(model.fillDuration.calledWith('00:40:10'));
+
 });
