@@ -8,15 +8,6 @@ sinon = require('sinon');
 var cs = require('../src/ontrail_addex_contentscript.js');
 suite('Ontrail contentscript');
 
-// Javascript date constructor takes moths as 0...11
-test('#toOntrailDateString', function() {
-	assert.equal('11.2.1981', cs.toOntrailDateString(new Date(1981, 1, 11)));
-});
-
-test('#toOntrailDateString December', function() {
-	assert.equal('11.12.1981', cs.toOntrailDateString(new Date(1981, 11, 11)));
-});
-
 function assertModelAction(data, expectation) {
 	var mock = sinon.mock(OntrailModel);
 	expectation(mock);
@@ -66,4 +57,24 @@ test('#prefill heart rate', function() {
 	}, function(model) {
 		model.expects('fillHeartRate').once().withArgs('100');
 	})
+});
+
+function assertDate(expected, timestamp) {
+	assertModelAction({
+		timestamp : timestamp
+	}, function(model) {
+		model.expects('fillDate', expected);
+	});
+}
+test('#prefill date', function() {
+	assertDate('23.4.2012', '2012-04-23T18:25:43.511Z');
+});
+
+// Javascript date constructor takes moths as 0...11
+test('#toOntrailDateString', function() {
+	assertDate('11.2.1981', new Date(1981, 1, 11).toJSON());
+});
+
+test('#toOntrailDateString December', function() {
+	assertDate('11.12.1981', new Date(1981, 11, 11).toJSON());
 });

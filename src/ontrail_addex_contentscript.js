@@ -1,7 +1,6 @@
 OntrailModel = require('./ontrailmodel.js');
 
 module.exports = {
-	toOntrailDateString : toOntrailDateString,
 	Prefiller : Prefiller
 };
 
@@ -25,7 +24,6 @@ var prefiller = Prefiller(OntrailModel);
 
 function prefillValues(request, sender, sendResponse) {
 	prefiller(request);
-	fillvalue('ex-date', toOntrailDateString(new Date(request.timestamp)));
 
 	// sport selector is a bit more tricky
 	selector = document.querySelector('#ex-sport');
@@ -37,13 +35,19 @@ function prefillValues(request, sender, sendResponse) {
 
 function Prefiller(model) {
 	return function(data) {
-		if (data.duration)
+		if (data.duration) {
 			// duration has millisecond precision
 			model.fillDuration(data.duration.split('.', 1)[0]);
-		if (data.distance)
+		}
+		if (data.distance) {
 			model.fillDistance(formatDistance(data.distance));
-		if (data.avgheartrate)
+		}
+		if (data.avgheartrate) {
 			model.fillHeartRate(data.avgheartrate);
+		}
+		if (data.timestamp) {
+			model.fillDate(toOntrailDateString(new Date(data.timestamp)));
+		}
 	};
 }
 
