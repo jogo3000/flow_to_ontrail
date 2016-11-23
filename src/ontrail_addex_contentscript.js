@@ -41,9 +41,10 @@ function Prefiller(model) {
 	return function(data) {
 		if (data.duration)
 			model.fillDuration(data.duration.split('.', 1)[0]);
-		if (data.distance) {
+		if (data.distance)
 			model.fillDistance(formatDistance(data.distance));
-		}
+		if (data.avgheartrate)
+			model.fillHeartRate(data.avgheartrate);
 	};
 }
 

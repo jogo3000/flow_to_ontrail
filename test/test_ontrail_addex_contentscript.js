@@ -59,3 +59,11 @@ test('#prefill distance rounding up to full kilometers', function() {
 test('#prefill distance sub kilometer distances', function() {
 	assertDistanceFormat('0,50 km', '499');
 });
+
+test('#prefill heart rate', function() {
+	assertModelAction({
+		avgheartrate : '100'
+	}, function(model) {
+		model.expects('fillHeartRate').once().withArgs('100');
+	})
+});
