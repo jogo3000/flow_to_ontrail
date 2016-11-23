@@ -39,7 +39,11 @@ function prefillValues(request, sender, sendResponse) {
 
 function Prefiller(model) {
 	return function(data) {
-		model.fillDuration(data.duration.split('.', 1)[0]);
+		if (data.duration)
+			model.fillDuration(data.duration.split('.', 1)[0]);
+		if (data.distance) {
+			model.fillDistance(formatDistance(data.distance));
+		}
 	};
 }
 
