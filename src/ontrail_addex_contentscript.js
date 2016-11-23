@@ -39,8 +39,8 @@ function prefillValues(request, sender, sendResponse) {
 
 function Prefiller(model) {
 	return function(data) {
-
+		model.fillDuration(data.duration.split('.', 1)[0]);
 	};
-};
+}
 
 chrome.runtime.onMessage.addListener(prefillValues);
