@@ -20,21 +20,8 @@ function fillvalue(id, value) {
 	element.previousElementSibling.classList = [ 'active' ]; // beta.ontrail.net
 }
 
-var prefiller = Prefiller(OntrailModel);
-
-function prefillValues(request, sender, sendResponse) {
-	prefiller(request);
-
-	// sport selector is a bit more tricky
-	selector = document.querySelector('#ex-sport');
-	for (var i = 0; i < selector.options.length; i++) {
-		selector.options[i].selected = selector.options[i].value === request.extype;
-	}
-	selector.dispatchEvent(new Event('change'));
-}
-
 function Prefiller(model) {
-	return function(data) {
+	return function(data, sender, sendResponse) {
 		if (data.duration) {
 			// duration has millisecond precision
 			model.fillDuration(data.duration.split('.', 1)[0]);
@@ -48,7 +35,12 @@ function Prefiller(model) {
 		if (data.timestamp) {
 			model.fillDate(toOntrailDateString(new Date(data.timestamp)));
 		}
+		if (data.extype) {
+			var sport = (data.extype in model.TRANSLATIONS) ? model.TRANSLATIONS[data.extype]
+					: data.extype;
+			model.fillSportSelector(sport);
+		}
 	};
 }
 
-chrome.runtime.onMessage.addListener(prefillValues);
+chrome.runtime.onMessage.addListener(Prefiller(OntrailModel));

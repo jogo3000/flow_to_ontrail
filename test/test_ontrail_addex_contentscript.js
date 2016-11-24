@@ -15,6 +15,26 @@ function assertModelAction(data, expectation) {
 	mock.verify();
 }
 
+function assertSport(expected, sport) {
+	assertModelAction({
+		extype : expected
+	}, function(mock) {
+		mock.expects('fillSportSelector').once().withArgs(sport);
+	});
+}
+
+test('#Prefill sport Juoksu', function() {
+	assertSport('Juoksu', 'Juoksu');
+});
+
+test('#Prefill sport Ratajuoksu', function() {
+	assertSport('Ratajuoksu', 'Juoksu');
+});
+
+test('#Prefill Nykytanssi', function() {
+	assertSport('Nykytanssi', 'Tanssi');
+})
+
 test('#Prefill duration', function() {
 	assertModelAction({
 		duration : '00:40:10.101'
