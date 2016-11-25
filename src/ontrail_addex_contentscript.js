@@ -4,20 +4,8 @@ module.exports = {
 	Prefiller : Prefiller
 };
 
-function formatDistance(v) {
-	var i = parseFloat(v) / 1000;
-	return i.toFixed(2).replace('.', ',') + ' km';
-}
-
 function toOntrailDateString(d) {
 	return d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear();
-}
-
-function fillvalue(id, value) {
-	element = document.querySelector('#' + id);
-	element.value = value;
-	element.dispatchEvent(new KeyboardEvent('keyup')); // trigger validation
-	element.previousElementSibling.classList = [ 'active' ]; // beta.ontrail.net
 }
 
 function Prefiller(model) {
@@ -27,13 +15,15 @@ function Prefiller(model) {
 			model.fillDuration(data.duration.split('.', 1)[0]);
 		}
 		if (data.distance) {
-			model.fillDistance(formatDistance(data.distance));
+			var s = parseFloat(data.distance) / 1000;
+			model.fillDistance(s.toFixed(2).replace('.', ',') + ' km');
 		}
 		if (data.avgheartrate) {
 			model.fillHeartRate(data.avgheartrate);
 		}
 		if (data.timestamp) {
-			model.fillDate(toOntrailDateString(new Date(data.timestamp)));
+			var d = new Date(data.timestamp);
+			model.fillDate(toOntrailDateString(d));
 		}
 		if (data.extype) {
 			var sport = (data.extype in model.TRANSLATIONS) ? model.TRANSLATIONS[data.extype]
