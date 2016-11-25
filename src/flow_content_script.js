@@ -56,6 +56,12 @@ function parseFlowDate(s) {
 	return new Date(year, month, day, hour, minute);
 }
 
+function readAscent() {
+	var node = document
+			.querySelector('#trainingDetailsContainerBox > div > div.col-md-8.col-md-push-4.exercise-statistics-wrapper > fieldset > div > div > aside.col-md-4.col-sm-4.col-xs-12.clearfix.ASCENT > div.basic-data-panel__value > span.basic-data-panel__value-container');
+	return node ? node.textContent : '';
+}
+
 function readValues(data, sender, sendResponse) {
 	response = {
 		duration : document.getElementById('preciseDuration').getAttribute(
@@ -68,8 +74,7 @@ function readValues(data, sender, sendResponse) {
 		timestamp : parseFlowDate(
 				document.querySelector('#sportHeading > br').nextSibling.textContent)
 				.toJSON(),
-		ascent : document
-				.querySelector('#trainingDetailsContainerBox > div > div.col-md-8.col-md-push-4.exercise-statistics-wrapper > fieldset > div > div > aside.col-md-4.col-sm-4.col-xs-12.clearfix.ASCENT > div.basic-data-panel__value > span.basic-data-panel__value-container').textContent
+		ascent : readAscent()
 
 	};
 	sendResponse(response);
