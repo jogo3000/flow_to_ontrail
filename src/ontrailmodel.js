@@ -25,6 +25,9 @@ module.exports = {
 		}
 		selector.dispatchEvent(new Event('change'));
 	},
+	fillAscent : function(h) {
+		this.fillTextValue('ex-detailElevation', h);
+	},
 	TRANSLATIONS : {
 		'Juoksu' : 'Juoksu',
 		'Juoksumatto' : 'Juoksu',

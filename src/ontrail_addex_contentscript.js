@@ -30,6 +30,9 @@ function Prefiller(model) {
 					: data.extype;
 			model.fillSportSelector(sport);
 		}
+		if (data.ascent) {
+			model.fillAscent(data.ascent);
+		}
 	};
 }
 
