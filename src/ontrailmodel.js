@@ -16,7 +16,7 @@ module.exports = {
 		this.fillTextValue('ex-avghr', hr);
 	},
 	fillDate : function(date) {
-		this.fillTextValue('ex-avghr', date);
+		this.fillTextValue('ex-date', date);
 	},
 	fillSportSelector : function(sport) {
 		selector = document.querySelector('#ex-sport');
