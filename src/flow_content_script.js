@@ -62,13 +62,18 @@ function readAscent() {
 	return node ? node.textContent : '';
 }
 
+function readHeartRate() {
+	var node = document.getElementById('BDPhrAvg');
+	return node ? node.innerText : '';
+}
+
 function readValues(data, sender, sendResponse) {
 	response = {
 		duration : document.getElementById('preciseDuration').getAttribute(
 				'value'),
 		distance : document.getElementById('preciseDistanceStr').getAttribute(
 				'value'),
-		avgheartrate : document.getElementById('BDPHrAvg').innerText,
+		avgheartrate : readHeartRate(),
 		extype : trim(document.getElementById('sport-icon-image').getAttribute(
 				'title')),
 		timestamp : parseFlowDate(
