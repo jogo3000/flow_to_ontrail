@@ -1,5 +1,5 @@
 {"name": "Flow to Ontrail",
- "version": "1.4",
+ "version": "1.5",
  "description": "Prefills an Ontrail report based on a Polar flow excercise report",
  "background":  {
      "scripts": ["background.js"],

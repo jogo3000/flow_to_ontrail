@@ -63,7 +63,7 @@ function readAscent() {
 }
 
 function readHeartRate() {
-	var node = document.getElementById('BDPhrAvg');
+	var node = document.getElementById('BDPHrAvg');
 	return node ? node.innerText : '';
 }
 
