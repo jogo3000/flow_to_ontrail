@@ -19,7 +19,7 @@ browser.runtime.onInstalled.addListener(function() {
     });
 });
 
-prefillOntrail = function() {
+const prefillOntrail = () => {
 
     let data = {};
 
