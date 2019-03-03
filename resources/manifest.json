@@ -22,7 +22,9 @@
  },
  "page_action": {
      "default_icon": "ico-19.png",
-     "default_title": "Luo raportti"},
+     "default_title": "Luo raportti",
+     "show_matches": ["https://flow.polar.com/training/analysis/*"]
+ },
  "permissions": [
      "declarativeContent",
      "tabs",
