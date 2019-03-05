@@ -36,20 +36,19 @@ const prefillOntrail = () => {
     // Open a new tab and inject content script
     browser.tabs.create({
 	'url' : 'http://beta.ontrail.net/#addex'
-    });
-
-    browser.tabs.executeScript(null, {
-	file : "ontrail_addex_contentscript.js"
-    }, function() {
-	// Message content script to prefill data
-	browser.tabs.query({
-	    active : true,
-	    currentWindow : true
-	}, function(tabs) {
-	    browser.tabs.sendMessage(tabs[0].id, data, null, null);
+    }).then(() => {
+	browser.tabs.executeScript(null, {
+	    file : "ontrail_addex_contentscript.js"
+	}, function() {
+	    // Message content script to prefill data
+	    browser.tabs.query({
+		active : true,
+		currentWindow : true
+	    }, function(tabs) {
+		browser.tabs.sendMessage(tabs[0].id, data, null, null);
+	    });
 	});
     });
-
 };
 
 browser.pageAction.onClicked.addListener(prefillOntrail);
