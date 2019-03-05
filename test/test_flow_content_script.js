@@ -1,7 +1,9 @@
+/*
+  Unit tests for flow content script
+*/
 const assert = require('assert');
 
 const cs = require('../src/flow_content_script.js');
-suite('Flow contentscript');
 
 describe('trim', function() {
     it('should trim "  Juoksu   " to "Juoksu"', function () {
@@ -21,6 +23,7 @@ function assertDate(s, f) {
     var parsed = cs.parseFlowDate(s);
     f(parsed);
 }
+
 describe('Date parsing from input scraped from Finnish flow.polar.com', function() {
     it('should parse the year 2017', function() {
 	assertDate("   Lauantai, Marras 1, 2017 06:50 | Polar V800", function(p) {
