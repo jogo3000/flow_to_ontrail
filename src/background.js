@@ -1,31 +1,5 @@
 //const browser = window.chrome || window.browser;
 
-browser.runtime.onInstalled.addListener(() => {
-  browser.declarativeContent.onPageChanged.removeRules(undefined, () => {
-    browser.declarativeContent.onPageChanged.addRules([
-      {
-        conditions: [
-          new browser.declarativeContent.PageStateMatcher({
-            pageUrl: {
-              hostEquals: "flow.polar.com",
-              schemes: ["https"],
-              pathContains: "training/analysis"
-            }
-          }),
-          new browser.declarativeContent.PageStateMatcher({
-            pageUrl: {
-              hostEquals: "ontrail.net",
-              schemes: ["http"],
-              pathContains: "#addex"
-            }
-          })
-        ],
-        actions: [new browser.declarativeContent.ShowPageAction()]
-      }
-    ]);
-  });
-});
-
 const prefillOntrail = () => {
   let data = {};
 

@@ -26,7 +26,6 @@
      "show_matches": ["https://flow.polar.com/training/analysis/*"]
  },
  "permissions": [
-     "declarativeContent",
      "tabs",
      "http://beta.ontrail.net/#addex",
      "https://flow.polar.com/training/analysis/*"
