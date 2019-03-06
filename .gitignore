@@ -8,3 +8,4 @@ jslintconf
 *.pem
 screenshots/
 *.zip
+npm-debug.log

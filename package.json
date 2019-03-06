@@ -4,7 +4,8 @@
   "description": "Chrome/Firefox/Opera plugin which auto fills an ontrail.net exercise report based on a Polar Flow activity report.",
   "scripts": {
     "compile": "node compile.js",
-    "posttest": "jshint src",
+    "posttest": "eslint src",
+    "eslint": "eslint src",
     "test": "mocha -u qunit"
   },
   "repository": {
@@ -21,16 +22,18 @@
   "devDependencies": {
     "browserify": "^16.2.3",
     "chai": "^3.5.0",
+    "eslint": "^5.15.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-prettier": "^3.0.1",
     "jsdom": "^9.12.0",
-    "jshint": "^2.10.1",
     "mocha": "^3.5.3",
+    "prettier": "^1.16.4",
     "sinon": "^1.17.7",
     "sinon-chrome": "^2.3.2",
     "web-ext": "^3.0.0"
   },
   "private": true,
-  "dependencies": {},
-  "jshintConfig": {
-    "esversion": 6
-  }
+  "dependencies": {}
 }
