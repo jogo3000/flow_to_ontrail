@@ -1,8 +1,3 @@
-/*
-  Should be able to reuse same code in chrome and other browsers with something like this.
-   const browser = window.chrome || window.browser;
-*/
-
 // http://stackoverflow.com/questions/1418050/string-strip-for-javascript
 function trim(s) {
   return s.replace(/^\s+|\s+$/g, "");

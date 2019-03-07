@@ -1,5 +1,3 @@
-//const browser = window.chrome || window.browser;
-
 const prefillOntrail = () => {
   let data = {};
 
@@ -7,7 +5,7 @@ const prefillOntrail = () => {
   browser.tabs.query(
     {
       active: true,
-      currentWindow: true
+      currentWindow: true,
     },
     tabs => {
       browser.tabs.sendMessage(tabs[0].id, {}, {}, response => {
@@ -19,13 +17,13 @@ const prefillOntrail = () => {
   // Open a new tab and inject content script
   browser.tabs
     .create({
-      url: "http://beta.ontrail.net/#addex"
+      url: "http://beta.ontrail.net/#addex",
     })
     .then(() => {
       browser.tabs.executeScript(
         null,
         {
-          file: "ontrail_addex_contentscript.js"
+          file: "ontrail_addex_contentscript.js",
         },
         () => {
           // Message content script to prefill data
@@ -36,7 +34,7 @@ const prefillOntrail = () => {
             },
             tabs => {
               browser.tabs.sendMessage(tabs[0].id, data, null, null);
-            },
+            }
           );
         }
       );

@@ -24,7 +24,7 @@ module.exports = {
   },
   fillSportSelector(sport) {
     const selector = document.querySelector("#ex-sport");
-    for (let i = 0; i < selector.options.length; i++) {
+    for (let i = 0; i < selector.options.length; i += 1) {
       selector.options[i].selected = selector.options[i].value === sport;
     }
     selector.dispatchEvent(new Event("change"));
