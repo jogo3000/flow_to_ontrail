@@ -35,5 +35,8 @@
     "web-ext": "^3.0.0"
   },
   "private": true,
-  "dependencies": {}
+    "dependencies": {},
+    "prettier": {
+        "trailingComma": "es5"
+    }
 }

@@ -11,7 +11,7 @@ function toMozDateString(d) {
 const stripMilliseconds = duration => duration.split(".", 1)[0];
 
 function Prefiller(model) {
-  return function(data, sender, sendResponse) {
+  return (data, sender, sendResponse) => {
     if (data.duration) {
       // duration has millisecond precision
       model.fillDuration(stripMilliseconds(data.duration));
@@ -30,7 +30,6 @@ function Prefiller(model) {
       model.fillDate(ontrailDateString);
       const valueOnPage = model.readDate();
       if (valueOnPage !== ontrailDateString) {
-        console.log("Wasn't able to prefill date, trying another format");
         // Try another format
         const alternateFormat = toMozDateString(date);
         model.fillDate(alternateFormat);
@@ -39,8 +38,8 @@ function Prefiller(model) {
     if (data.extype) {
       const sport =
         data.extype in model.TRANSLATIONS
-        ? model.TRANSLATIONS[data.extype]
-        : data.extype;
+          ? model.TRANSLATIONS[data.extype]
+          : data.extype;
       model.fillSportSelector(sport);
     }
     if (data.ascent) {

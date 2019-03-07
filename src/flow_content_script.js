@@ -1,4 +1,7 @@
-//const browser = window.chrome || window.browser;
+/*
+  Should be able to reuse same code in chrome and other browsers with something like this.
+   const browser = window.chrome || window.browser;
+*/
 
 // http://stackoverflow.com/questions/1418050/string-strip-for-javascript
 function trim(s) {
@@ -30,7 +33,7 @@ const MONTHS = {
   Sep: 8,
   Oct: 9,
   Nov: 10,
-  Dec: 11
+  Dec: 11,
 };
 
 /**
@@ -44,7 +47,7 @@ const MONTHS = {
 function parseFlowDate(s) {
   const sa = s
     .trim()
-    .replace(/[\,:\|]/g, " ")
+    .replace(/[,:|]/g, " ")
     .replace(/\s+/g, " ")
     .split(" ");
   const year = parseInt(sa[3], 10);
@@ -84,7 +87,7 @@ function readValues(data, sender, sendResponse) {
     timestamp: parseFlowDate(
       document.querySelector("#sportHeading > br").nextSibling.textContent
     ).toJSON(),
-    ascent: readAscent()
+    ascent: readAscent(),
   };
   sendResponse(response);
 }

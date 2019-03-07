@@ -2,35 +2,35 @@ module.exports = {
   fillTextValue(id, value) {
     const element = document.querySelector(`#${id}`);
     element.value = value;
-    element.dispatchEvent(new KeyboardEvent('keyup')); // trigger
+    element.dispatchEvent(new KeyboardEvent("keyup")); // trigger
     // validation
-    element.previousElementSibling.classList = ['active']; // beta.ontrail.net
+    element.previousElementSibling.classList = ["active"]; // beta.ontrail.net
   },
   fillDuration(t) {
-    this.fillTextValue('ex-duration', t);
+    this.fillTextValue("ex-duration", t);
   },
   fillDistance(s) {
-    this.fillTextValue('ex-distance', s);
+    this.fillTextValue("ex-distance", s);
   },
   fillHeartRate(hr) {
-    this.fillTextValue('ex-avghr', hr);
+    this.fillTextValue("ex-avghr", hr);
   },
   fillDate(date) {
-    this.fillTextValue('ex-date', date);
+    this.fillTextValue("ex-date", date);
   },
   readDate() {
-    const dateInput = document.querySelector('#ex-date');
+    const dateInput = document.querySelector("#ex-date");
     return dateInput.value;
   },
   fillSportSelector(sport) {
-    const selector = document.querySelector('#ex-sport');
+    const selector = document.querySelector("#ex-sport");
     for (let i = 0; i < selector.options.length; i++) {
       selector.options[i].selected = selector.options[i].value === sport;
     }
-    selector.dispatchEvent(new Event('change'));
+    selector.dispatchEvent(new Event("change"));
   },
   fillAscent(h) {
-    this.fillTextValue('ex-detailElevation', h);
+    this.fillTextValue("ex-detailElevation", h);
   },
   TRANSLATIONS: {
     Juoksu: "Juoksu",
@@ -238,6 +238,6 @@ module.exports = {
     "Water skiing": "Muu laji",
     "Wheelchair racing": "Muu laji",
     Windsurfing: "Muu laji",
-    Yoga: "Jooga"
+    Yoga: "Jooga",
   },
 };
