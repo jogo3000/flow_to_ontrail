@@ -9,3 +9,4 @@ jslintconf
 screenshots/
 *.zip
 npm-debug.log
+/target/
