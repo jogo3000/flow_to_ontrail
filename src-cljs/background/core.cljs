@@ -1,4 +1,4 @@
-(ns background)
+(ns background.core)
 
 (defn query-active-tab []
   (.. js/browser

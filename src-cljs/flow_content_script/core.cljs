@@ -1,4 +1,4 @@
-(ns flow-content-script
+(ns flow-content-script.core
   "This is injected to the flow.polar.com site's training analysis page. The background script requests the exercise data
   from the page when user clicks the page action button"
   (:require [clojure.string :as str]))

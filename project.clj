@@ -10,4 +10,8 @@
                        {:source-paths ["src-cljs/flow_content_script"]
                         :compiler {:output-to "build/flow_content_script.js"
                                    :optimizations :whitespace
+                                   :pretty-print true}}
+                       {:source-paths ["src-cljs/ontrail_addex_contentscript"]
+                        :compiler {:output-to "build/ontrail_addex_contentscript.js"
+                                   :optimizations :whitespace
                                    :pretty-print true}}]})
