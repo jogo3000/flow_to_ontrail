@@ -244,7 +244,7 @@
   (fill-text-value! "#ex-avghr" val))
 
 (defn fill-date! [val]
-  (let [date (.Date val)
+  (let [date (js/Date. val)
         ontrail-date (Date->ontrail-date date)]
     (fill-text-value! "#ex-date" ontrail-date)
     ;; Mozilla renders the date control different than Chrome
@@ -263,7 +263,7 @@
   [val]
   (let [ontrail-sport (get flow-sport->ontrail-sport val val)
         selector (.. js/document (querySelector "#ex-sport"))]
-    (doseq [option (.-options selector)]
+    (doseq [option (.-options selector)]   ;; TODO Error: "[object HTMLOptionsCollection] is not ISeqable"
       (set! (.-selected option) (= (.-value option) ontrail-sport)))
     (.. selector (dispatchEvent (js/Event. "change")))))
 
@@ -271,13 +271,17 @@
   (.. js/console (log "Prefilling ontrail with" data))
   ;; TODO it appears data comes here fine, but is not moved forwards. Perhaps (:duration exercise)
   ;; does not pick any data. Who knows?
-  (let [exercise (js->clj data)]
-    (some-> (:duration exercise) (fill-duration!))
-    (some-> (:distance exercise) (fill-distance!))
-    (some-> (:avgheartrate exercise) (fill-heart-rate!))
-    (some-> (:timestamp exercise) (fill-date!))
-    (some-> (:extype exercise) (fill-sport!))
-    (some-> (:ascent exercise) (fill-ascent!))))
+  (let [exercise (js->clj data :keywordize-keys true)]
+    (doseq [[k f] [[:duration fill-duration!]
+                   [:distance fill-distance!]
+                   [:avgheartrate fill-heart-rate!]
+                   [:timestamp fill-date!]
+                   [:extype fill-sport!]
+                   [:ascent fill-ascent!]]]
+      (try
+        (some-> (k exercise) (f))
+        (catch :default e
+          (.. js/console (log "Error in" k e)))))))
 
 (.. js/browser
     -runtime
