@@ -1,3 +1,12 @@
+;; TODO
+;; 1. browser connected REPL
+;; 2. fix sport selector
+;; 3. modules -> if you can load multiple scripts with manifest, that is the way
+;; 4. copy resource files to build
+;; 5. update manifest in build with the correct version number
+;; 6. production build
+;; 7. package for firefox in production build
+
 (defproject flow-to-ontrail "1.7"
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [org.clojure/clojurescript "1.10.520"]]
