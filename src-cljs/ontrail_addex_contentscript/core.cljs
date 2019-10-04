@@ -262,15 +262,17 @@
   It is a strange picklist where selected flag needs to be set for all the options."
   [val]
   (let [ontrail-sport (get flow-sport->ontrail-sport val val)
-        selector (.. js/document (querySelector "#ex-sport"))]
-    (doseq [option (.-options selector)]   ;; TODO Error: "[object HTMLOptionsCollection] is not ISeqable"
-      (set! (.-selected option) (= (.-value option) ontrail-sport)))
+        selector (.. js/document (querySelector "#ex-sport"))
+        options (.-options selector)]
+    (loop [i 0]
+      (when (< i (.-length options))
+        (let [option (aget options i)]
+          (set! (.-selected option) (= (.-value option) ontrail-sport)))
+        (recur (inc i))))
     (.. selector (dispatchEvent (js/Event. "change")))))
 
 (defn prefill-ontrail! [data _ _]
   (.. js/console (log "Prefilling ontrail with" data))
-  ;; TODO it appears data comes here fine, but is not moved forwards. Perhaps (:duration exercise)
-  ;; does not pick any data. Who knows?
   (let [exercise (js->clj data :keywordize-keys true)]
     (doseq [[k f] [[:duration fill-duration!]
                    [:distance fill-distance!]
