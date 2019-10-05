@@ -1,7 +1,8 @@
 (ns flow-content-script.core
   "This is injected to the flow.polar.com site's training analysis page. The background script requests the exercise data
   from the page when user clicks the page action button"
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [dom]))
 
 (defn parse-int [s]
   (js/parseInt s 10))
@@ -35,31 +36,18 @@
    "Nov" 10
    "Dec" 11})
 
-(defn element-by-id
-  "Returns DOM element with the given id"
-  [id]
-  (.. js/document
-      (getElementById id)))
-
-(defn element-value
-  "Returns the value of a DOM element with the given id"
-  [id]
-  (.. (element-by-id id)
-      (getAttribute "value")))
 
 (defn read-heart-rate
   "Returns the average heart rate from an excercise page"
   []
-  (if-let [el (element-by-id "BDPHrAvg")]
+  (if-let [el (dom/element-by-id "BDPHrAvg")]
     (.-innerText el)
     ""))
 
 (defn read-exercise-type
   "Returns the exercise type, e.g. Running, Orienteering from the exercise page"
   []
-  (-> (.. (element-by-id "sport-icon-image")
-          (getAttribute "title"))
-      str/trim))
+  (-> (dom/element-title "sport-icon-image") str/trim))
 
 (defn read-date
   "Changes Polar date format into JSON timestamp format
@@ -68,8 +56,7 @@
   In the English site all else is the same but month name has been translated"
   []
   (let [[_ month day year hour minute]
-        (-> (.. js/document
-                (querySelector "#sportHeading > br")
+        (-> (.. (dom/element-by-query "#sportHeading > br")
                 -nextSibling
                 -textContent)
             str/trim
@@ -81,16 +68,15 @@
 (defn read-ascent
   "Returns ascent information from the exercise page"
   []
-  (if-let [el (.. js/document
-                  ;; This query selector has been crafted with developer tools. If it stops working use it to create another one
-                  (querySelector "#trainingDetailsContainerBox > div > div.col-md-8.col-md-push-4.exercise-statistics-wrapper > fieldset > div > div > aside.col-md-4.col-sm-4.col-xs-12.clearfix.ASCENT > div.basic-data-panel__value > span.basic-data-panel__value-container"))]
+  ;; This query selector has been crafted with developer tools. If it stops working use it to create another one
+  (if-let [el (dom/element-by-query "#trainingDetailsContainerBox > div > div.col-md-8.col-md-push-4.exercise-statistics-wrapper > fieldset > div > div > aside.col-md-4.col-sm-4.col-xs-12.clearfix.ASCENT > div.basic-data-panel__value > span.basic-data-panel__value-container")]
     (.-innerText el)
     ""))
 
 (defn read-exercise [_ _ send-response]
   (.. js/console (log "read-exercise from flow"))
-  (send-response #js {:duration (element-value "preciseDuration")
-                      :distance (element-value "preciseDistanceStr")
+  (send-response #js {:duration (dom/element-value "preciseDuration")
+                      :distance (dom/element-value "preciseDistanceStr")
                       :avgheartrate (read-heart-rate)
                       :extype (read-exercise-type)
                       :timestamp (read-date)

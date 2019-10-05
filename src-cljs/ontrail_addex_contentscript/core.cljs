@@ -1,5 +1,6 @@
 (ns ontrail-addex-contentscript.core
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [dom]))
 
 (def flow-sport->ontrail-sport
   {"Juoksu" "Juoksu"
@@ -211,7 +212,7 @@
    })
 
 (defn read-date! []
-  (.. js/document (querySelector "#ex-date") -value))
+  (.. (dom/element-by-query "#ex-date") -value))
 
 (defn Date->ontrail-date [d]
   (let [day (.getDate d)
@@ -223,7 +224,7 @@
   (.. d (toISOString) (split "T") (aget 0)))
 
 (defn fill-text-value! [id value]
-  (let [el (.. js/document (querySelector id))]
+  (let [el (dom/element-by-query id)]
     (set! (.-value el) value)
     (.. el (dispatchEvent (js/KeyboardEvent. "keyup")))
     (set! (.. el -previousElementSibling -classList) #js ["active"])))
@@ -262,7 +263,7 @@
   It is a strange picklist where selected flag needs to be set for all the options."
   [val]
   (let [ontrail-sport (get flow-sport->ontrail-sport val val)
-        selector (.. js/document (querySelector "#ex-sport"))
+        selector (dom/element-by-query "#ex-sport")
         options (.-options selector)]
     (loop [i 0]
       (when (< i (.-length options))
