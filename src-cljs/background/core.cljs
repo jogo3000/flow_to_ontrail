@@ -25,12 +25,19 @@
         (executeScript nil #js {:file "ontrail_addex_contentscript.js"}
                        (request-prefill! exercise-info)))))
 
+(defn load-cljs-base! [exercise-info]
+  (fn [_]
+    (.. js/browser
+        -tabs
+        (executeScript nil #js {:file "cljs_base.js"}
+                       (load-content-script! exercise-info)))))
+
 (defn open-ontrail! [exercise-info]
   (.. js/console (log "open-ontrail!"))
   (.. js/browser
       -tabs
       (create #js {:url "http://beta.ontrail.net/#addex"})
-      (then (load-content-script! exercise-info))))
+      (then (load-cljs-base! exercise-info))))
 
 (defn request-exercise-info [tabs]
   (.. js/console (log "request-exercise-info"))

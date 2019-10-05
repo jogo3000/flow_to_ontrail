@@ -1,5 +1,5 @@
 {"name": "Flow to Ontrail",
- "version": "1.6",
+ "version": "1.7",
  "description": "Prefills an Ontrail report based on a Polar flow excercise report",
  "background":  {
      "scripts": ["background.js"],
@@ -11,14 +11,14 @@
 	 "js": ["flow_content_script.js"]
      },
      {
-     "matches": ["http://beta.ontrail.net/#addex"],
-     "js": ["ontrail_addex_contentscript.js"]
+         "matches": ["http://beta.ontrail.net/#addex"],
+         "js": ["ontrail_addex_contentscript.js"]
      }
  ],
  "icons": {
- 	"19": "ico-19.png",
- 	"48": "ico-48.png",
- 	"128": "ico-128.png"
+     "19": "ico-19.png",
+     "48": "ico-48.png",
+     "128": "ico-128.png"
  },
  "page_action": {
      "default_icon": "ico-19.png",

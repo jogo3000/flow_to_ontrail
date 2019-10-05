@@ -1,7 +1,5 @@
 ;; TODO
 ;; 1. browser connected REPL
-;; 2. fix sport selector
-;; 3. modules -> if you can load multiple scripts with manifest, that is the way
 ;; 4. copy resource files to build
 ;; 5. update manifest in build with the correct version number
 ;; 6. production build
@@ -12,15 +10,16 @@
                  [org.clojure/clojurescript "1.10.520"]]
   :plugins [[lein-cljsbuild "1.1.7"]]
   :jvm-opts ["-Dfile.encoding UTF-8"]
-  :cljsbuild {:builds [{:source-paths ["src-cljs/background"]
-                        :compiler {:output-to "build/background.js"
-                                   :optimizations :whitespace
-                                   :pretty-print true}}
-                       {:source-paths ["src-cljs/flow_content_script"]
-                        :compiler {:output-to "build/flow_content_script.js"
-                                   :optimizations :whitespace
-                                   :pretty-print true}}
-                       {:source-paths ["src-cljs/ontrail_addex_contentscript"]
-                        :compiler {:output-to "build/ontrail_addex_contentscript.js"
-                                   :optimizations :whitespace
+  :resource-paths ["resources/"]
+  :cljsbuild {:builds [{:source-paths ["src-cljs"]
+                        :compiler {:modules {:background {:entries #{background.core}
+                                                          :output-to "build/background.js"}
+                                             :flow_content_script.js {:entries #{flow-content-script.core}
+                                                                      :output-to "build/flow_content_script.js"}
+                                             :ontrail_addex_contentscript.js {:entries #{ontrail-addex-contentscript.core}
+                                                                              :output-to "build/ontrail_addex_contentscript.js"}}
+                                   :output-dir "build"
+                                   :asset-path "build/"
+                                   :optimizations :simple
+                                   :verbose true
                                    :pretty-print true}}]})
