@@ -1,4 +1,5 @@
-(ns background.core)
+(ns background.core
+  (:require [browser]))
 
 (defn query-active-tab []
   (.. js/browser
@@ -12,7 +13,6 @@
         (then (fn [tabs]
                 (let [ontrail-tab (aget tabs 0)
                       ontrail-tab-id (.-id ontrail-tab)]
-                  (.. js/console (log "tab" ontrail-tab))
                   (.. js/browser
                       -tabs
                       (sendMessage ontrail-tab-id exercise-info nil nil))))))))
@@ -41,19 +41,12 @@
 
 (defn request-exercise-info [tabs]
   (.. js/console (log "request-exercise-info"))
-  (let [flow-tab-id (-> tabs (aget 0) .-id)
-        empty-js #js {}]
-    (.. js/browser
-        -tabs
-        (sendMessage flow-tab-id empty-js empty-js)
-        (then open-ontrail!))))
+  (let [flow-tab-id (-> tabs (aget 0) .-id)]
+    (browser/send-message-to-tab flow-tab-id open-ontrail!)))
 
 (defn copy-data-to-ontrail! [tab]
   (.. js/console (log "copy-data-to-ontrail!"))
-  (.. (query-active-tab)
-      (then request-exercise-info)))
+  (browser/query-active-tab! request-exercise-info))
 
-(.. js/browser
-    -pageAction
-    -onClicked
-    (addListener copy-data-to-ontrail!))
+(defonce init
+  (browser/add-page-action-listener! copy-data-to-ontrail!))

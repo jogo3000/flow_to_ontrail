@@ -1,5 +1,6 @@
 (ns ontrail-addex-contentscript.core
   (:require [clojure.string :as str]
+            [browser]
             [dom]))
 
 (def flow-sport->ontrail-sport
@@ -286,7 +287,5 @@
         (catch :default e
           (.. js/console (log "Error in" k e)))))))
 
-(.. js/browser
-    -runtime
-    -onMessage
-    (addListener prefill-ontrail!))
+(defonce init
+  (browser/add-message-listener! prefill-ontrail!))

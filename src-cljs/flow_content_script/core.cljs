@@ -2,6 +2,7 @@
   "This is injected to the flow.polar.com site's training analysis page. The background script requests the exercise data
   from the page when user clicks the page action button"
   (:require [clojure.string :as str]
+            [browser]
             [dom]))
 
 (defn parse-int [s]
@@ -82,7 +83,5 @@
                       :timestamp (read-date)
                       :ascent (read-ascent)}))
 
-(.. js/browser
-    -runtime
-    -onMessage
-    (addListener read-exercise))
+(defonce init
+  (browser/add-message-listener! read-exercise))
