@@ -10,3 +10,4 @@ screenshots/
 *.zip
 npm-debug.log
 /target/
+/.log/
