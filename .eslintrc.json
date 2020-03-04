@@ -5,6 +5,7 @@
     },
     "extends": ["airbnb-base", "prettier"],
     "globals": {
+        "browser": true
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },

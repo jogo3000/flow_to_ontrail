@@ -12,3 +12,4 @@ npm-debug.log
 /target/
 /.rebel_readline_history
 /out/
+/.log/
