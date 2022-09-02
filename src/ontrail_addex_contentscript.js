@@ -1,4 +1,4 @@
-const OntrailModel = require("./ontrailmodel.js");
+const OntrailModel = require("./ontrailmodel");
 
 function toOntrailDateString(d) {
   return `${d.getDate()}.${d.getMonth() + 1}.${d.getFullYear()}`;
@@ -11,7 +11,7 @@ function toMozDateString(d) {
 const stripMilliseconds = duration => duration.split(".", 1)[0];
 
 function Prefiller(model) {
-  return (data, sender, sendResponse) => {
+  return data => {
     if (data.duration) {
       // duration has millisecond precision
       model.fillDuration(stripMilliseconds(data.duration));

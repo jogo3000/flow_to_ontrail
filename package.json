@@ -33,8 +33,7 @@
     "web-ext": "^3.0.0"
   },
   "private": true,
-    "dependencies": {},
-    "prettier": {
-        "trailingComma": "es5"
-    }
+  "prettier": {
+    "trailingComma": "es5"
+  }
 }
