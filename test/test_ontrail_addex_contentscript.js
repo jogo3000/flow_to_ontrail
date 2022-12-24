@@ -1,3 +1,5 @@
+const mocha = require('mocha');
+const describe = mocha.describe;
 require("assert");
 const sinon = require("sinon");
 const OntrailModel = require("../src/ontrailmodel.js");

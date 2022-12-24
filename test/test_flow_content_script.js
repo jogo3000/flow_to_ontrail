@@ -2,7 +2,8 @@
   Unit tests for flow content script
 */
 const assert = require('assert');
-
+const mocha = require('mocha');
+const describe = mocha.describe;
 const cs = require('../src/flow_content_script.js');
 
 describe('trim', function() {
@@ -13,7 +14,7 @@ describe('trim', function() {
 
 /**
  * Asserts date parsing results
- * 
+ *
  * @param s
  *            date string
  * @param f

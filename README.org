@@ -1,0 +1,27 @@
+* flow_to_ontrail
+Chrome/Firefox/Opera extension which auto fills an ontrail.net exercise report based on a Polar Flow activity report.
+** Developing
+Would be developers:
+Clone the repository. It's not in npm. Node.js is used to control dependencies, automatic testing and builds.
+*** Install dependencies
+#+begin_src sh
+  npm ci
+#+end_src
+*** Run tests
+#+begin_src sh
+  npm test
+#+end_src
+*** Compile
+#+begin_src sh
+  npm run compile
+#+end_src
+** Alteranatively use Podman
+#+begin_src sh
+  podman build -t flow-to-ontrail-dev .
+  podman run -v $PWD:/usr/dev --entrypoint=/bin/bash --interactive --tty --name flow-to-ontrail-dev flow-to-ontrail-dev
+#+end_src
+Build will appear in build/
+** Packaging
+For Firefox packaging, use web-ext.
+
+Note that you can't load the extension directly from src/, it needs to be compiled.
