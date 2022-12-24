@@ -5,7 +5,7 @@ Would be developers:
 Clone the repository. It's not in npm. Node.js is used to control dependencies, automatic testing and builds.
 
 <p>Install dependencies<br>
-<b>npm install</b></p>
+<b>npm ci</b></p>
 <p>Test it:<br>
 <b>npm test</b></p>
 <p>Sources:<br>
